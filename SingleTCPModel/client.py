@@ -1,4 +1,6 @@
 import socket
+from os.path import exists
+from os import mkdir
 
 HOST = "localhost"
 PORT = 9009
@@ -15,6 +17,9 @@ def get_bigfile_from_server(filename):
         if not data:
             print("<CLIENT>: File does not exisits or got error during transfer. [%s]" % filename)
             return
+        if not exists("download/"):
+            print("No Directory")
+            mkdir("download/")
         with open("download/"+filename, 'wb') as f:
             try:
                 while data:
